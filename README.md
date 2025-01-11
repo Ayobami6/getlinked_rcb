@@ -1,22 +1,41 @@
-## Django Starter Template
+AI Help ChatBot Backend Test Implementation
 
-#### Change Me
-- Rename the settings folder to your project name
+### Getting Started
+- Generate a service account for the realtime database being used 
+- Create `service_rcb.json` at the root of the app and update with the json file generated from the firebase admin
+- Update the service endpoint accordingly
 
-```sh
-mv rename_me project_name
-```
+```py
+class ChatAI(APIView):
+    """Chat AI Page"""
 
-- Relace with your project name
+    permission_classes = [AllowAny]
 
-```sh
-ROOT_URLCONF = '<project_name>.urls'  # settings.py
-```
+    @exception_advice
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        chat_id = data.get("chat_id")
+        print(chat_id)
+        message_id = data.get("message_id")
+        db_ref = db.reference(f"/")
+        chats_ref = db_ref.child(chat_id)
+        message_ref = chats_ref.child(message_id)
+        message = message_ref.get()
+        print(message)
+        # TODO Will process the message with AI and add the AI message
+        chats_ref.push(
+            {
+                "text": "Changed Named",
+                "userType": "AI",
+                "timestamp": datetime.now().isoformat(),
+                "username": "GetLinkedAI",
+            }
+        )
+        return service_response(
+            status="success",
+            message="Chat AI",
+            data={},
+            status_code=200,
+        )
 
-```sh
-WSGI_APPLICATION = '<project_name>.wsgi.application'  # settings.py
-```
-
-```sh
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', '<project_name>.settings') # asgi.py, wsgi.py and manage.py
 ```

@@ -38,7 +38,7 @@ class ChatAI(APIView):
         message_ref = chats_ref.child(message_id)
         message = message_ref.get()
         print(message)
-        # Will process the message with AI and add the AI message
+        # TODO Will process the message with AI and add the AI message
         chats_ref.push(
             {
                 "text": "Changed Named",
