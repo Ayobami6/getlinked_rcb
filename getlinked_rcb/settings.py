@@ -20,7 +20,6 @@ from sparky_utils.logger import LoggerConfig
 import firebase_admin
 from firebase_admin import credentials
 
-# Path to your Firebase service account key
 FIREBASE_CREDENTIALS_PATH = "service_rcb.json"
 
 # Initialize Firebase

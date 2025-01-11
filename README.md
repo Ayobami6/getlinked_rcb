@@ -4,6 +4,21 @@ AI Help ChatBot Backend Test Implementation
 - Generate a service account for the realtime database being used 
 - Create `service_rcb.json` at the root of the app and update with the json file generated from the firebase admin
 - Update the service endpoint accordingly
+- Update `settings.py`
+
+```py
+import firebase_admin
+from firebase_admin import credentials
+
+FIREBASE_CREDENTIALS_PATH = "service_rcb.json"
+
+# Initialize Firebase
+cred = credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
+# add the firebase database url
+firebase_admin.initialize_app(
+    cred, {"databaseURL": "https://hazel-airlock-377520-default-rtdb.firebaseio.com"}
+)
+```
 
 ```py
 class ChatAI(APIView):
